@@ -2,26 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#08090d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>For My Little Sun ☀️</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="stars"></div>
-  <div class="grain"></div>
+  <div id="stars" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
 
   <main>
     <!-- SCREEN 1 -->
-    <section class="screen active" id="screen-1">
+    <section class="screen active" id="screen-1" aria-label="Opening">
       <div class="hero">
-        <div class="sun-symbol">☀</div>
+        <div class="sun-symbol" aria-hidden="true">☀</div>
         <p class="eyebrow">A little something for you</p>
         <h1>For my<br><em>little sun</em></h1>
-        <p class="soft">I made this little gift for you</p> 
-        <button class="primary" id="openButton">Open <span>→</span></button>
+        <p class="soft">I made this little gift for you</p>
+
+        <button class="primary" id="openButton" type="button">
+          Open <span aria-hidden="true">→</span>
+        </button>
+
         <audio id="music" loop preload="auto">
           <source src="oursong.mp3.mp3" type="audio/mpeg">
         </audio>
@@ -29,59 +38,79 @@
     </section>
 
     <!-- SCREEN 2 -->
-    <section class="screen" id="screen-2">
+    <section class="screen" id="screen-2" aria-label="Birthday">
       <div class="center-content">
-        <div class="sunrise">
+        <div class="sunrise" aria-hidden="true">
           <div class="glow"></div>
           <div class="sun">☀</div>
         </div>
+
         <p class="eyebrow">August 28, 2026</p>
         <h2>Happy Birthday,<br><em>Lily</em> ❤️</h2>
-        <p class="soft reveal-delay">Today is your day.<br>And I wanted to give you something that could stay with you.</p>
-        <button class="ghost" data-next="3">Continue ↓</button>
+        <p class="soft reveal-delay">
+          Today is your day.<br>
+          And I wanted to give you something that could stay with you.
+        </p>
+
+        <button class="ghost" data-next="3" type="button">Continue ↓</button>
       </div>
     </section>
 
     <!-- SCREEN 3 -->
-    <section class="screen" id="screen-3">
+    <section class="screen" id="screen-3" aria-label="Letter">
       <div class="letter-wrap">
         <p class="eyebrow">A letter from me to you</p>
+
         <div class="letter">
           <p>My little sun,</p>
+
           <p>Happy birthday.</p>
+
           <p>
             I decided to code this little letter for you because, as I always say,
-            you're constantly on my mind. So i thought, "why not use what I'm learning to make something just for you?".
-            Every little word, line, and emoji in this code carries a tiny piece of what I feel for you. It’s my own little way of turning my thoughts into something you can see and keep.
-
+            you're constantly on my mind. So I thought, "why not use what I'm
+            learning to make something just for you?" Every little word, line,
+            and emoji in this code carries a tiny piece of what I feel for you.
+            It’s my own little way of turning my thoughts into something you can
+            see and keep.
           </p>
+
           <p>
             Meeting you is one of the most beautiful things that has happened
             to me. You became someone I think about in the quiet moments,
             someone I want to share my days with, and someone I want to see
             happy.
           </p>
+
           <p>
-            Sharing this day with you fills my heart with so much happiness. 
-            Being here for such an important day, your birthday, means more to me than 
-            I can put into words. You are an incredible woman who always makes me see the beauty in the world.
-            I want to be there for every achievement, every birthday, and even the simplest moments we share together.
-            I want to be there through all of it, not just for the special days, but for the ordinary ones too.
+            Sharing this day with you fills my heart with so much happiness.
+            Being here for such an important day, your birthday, means more to
+            me than I can put into words. You are an incredible woman who always
+            makes me see the beauty in the world.
           </p>
+
+          <p>
+            I want to be there for every achievement, every birthday, and even
+            the simplest moments we share together. I want to be there through
+            all of it, not just for the special days, but for the ordinary ones too.
+          </p>
+
           <p>
             I hope this new year of your life is kind to you. I hope you
             laugh a lot, dream without fear, and always remember that there
             is someone very far away who loves you deeply.
           </p>
+
           <p>Happy birthday, Lily. ❤️</p>
           <p class="signature">— Pedro</p>
         </div>
-        <button class="ghost" data-next="4">There is more ↓</button>
+
+        <button class="ghost" data-next="4" type="button">There is more ↓</button>
       </div>
     </section>
 
     <!-- SCREEN 4 -->
-    <section class="screen" id="screen-4">
+    <section class="screen" id="screen-4" aria-label="Distance">
       <div class="distance-content">
         <p class="eyebrow">A little too far away</p>
         <h2>11 hours apart.</h2>
@@ -89,29 +118,34 @@
 
         <div class="route">
           <div class="place">
-            <span class="flag">🇧🇷</span>
+            <span class="flag" aria-hidden="true">🇧🇷</span>
             <strong>Brazil</strong>
             <small>Pedro</small>
           </div>
-          <div class="flight">
+
+          <div class="flight" aria-hidden="true">
             <span class="line"></span>
             <span class="plane">✈</span>
             <span class="line"></span>
           </div>
+
           <div class="place">
-            <span class="flag">🇻🇳</span>
+            <span class="flag" aria-hidden="true">🇻🇳</span>
             <strong>Vietnam</strong>
             <small>Lily</small>
           </div>
         </div>
 
-        <p class="quote">“Distance never stopped you from becoming my favorite person.”</p>
-        <button class="ghost" data-next="5">A few things ↓</button>
+        <p class="quote">
+          “Distance never stopped you from becoming my favorite person.”
+        </p>
+
+        <button class="ghost" data-next="5" type="button">A few things ↓</button>
       </div>
     </section>
 
     <!-- SCREEN 5 -->
-    <section class="screen" id="screen-5">
+    <section class="screen" id="screen-5" aria-label="Things I love">
       <div class="things">
         <p class="eyebrow">Things I love about you</p>
         <h2>Just a few.</h2>
@@ -120,23 +154,27 @@
           <article class="card">
             <span>01</span>
             <h3>Your smile</h3>
-            <p>See your smile, even few times in the photos, fill my heart with love.</p></p>
+            <p>See your smile, even few times in the photos, fill my heart with love.</p>
           </article>
+
           <article class="card">
             <span>02</span>
             <h3>Your voice</h3>
             <p>I could listen to you for hours.</p>
           </article>
+
           <article class="card">
             <span>03</span>
             <h3>The way you are</h3>
             <p>Your jokes, funny photos, sense of humor.</p>
           </article>
+
           <article class="card">
             <span>04</span>
             <h3>Your Dedication</h3>
             <p>I love how hardworking, intelligent, and determined you are.</p>
           </article>
+
           <article class="card special">
             <span>05</span>
             <h3>The fact that I get to call you mine.</h3>
@@ -144,39 +182,52 @@
           </article>
         </div>
 
-        <button class="ghost" data-next="6">One more thing ↓</button>
+        <button class="ghost" data-next="6" type="button">One more thing ↓</button>
       </div>
     </section>
 
     <!-- SCREEN 6 -->
-    <section class="screen" id="screen-6">
+    <section class="screen" id="screen-6" aria-label="Surprise">
       <div class="surprise">
         <p class="eyebrow">One last little thing</p>
         <h2>Close your eyes<br>for a second.</h2>
         <p class="soft">Then click below.</p>
-        <button class="primary" id="hugButton">I'm ready <span>♡</span></button>
-        <div class="hug-message" id="hugMessage">
+
+        <button class="primary" id="hugButton" type="button">
+          I'm ready <span aria-hidden="true">♡</span>
+        </button>
+
+        <div class="hug-message" id="hugMessage" aria-live="polite">
           <p>Now imagine me hugging you.</p>
-          <span>♡</span>
+          <span aria-hidden="true">♡</span>
           <p class="small">I wish I could be there today.</p>
         </div>
       </div>
-      <button class="ghost final-next hidden" id="finalNext" data-next="7">One last thing ↓</button>
+
+      <button class="ghost final-next hidden" id="finalNext" data-next="7" type="button">
+        One last thing ↓
+      </button>
     </section>
 
     <!-- SCREEN 7 -->
-    <section class="screen" id="screen-7">
+    <section class="screen" id="screen-7" aria-label="Final message">
       <div class="final">
-        <div class="final-sun">☀</div>
+        <div class="final-sun" aria-hidden="true">☀</div>
         <p class="eyebrow">From your man</p>
         <h2>Happy Birthday,<br><em>Lily.</em></h2>
+
         <p class="final-text">
           I hope this year brings you everything you deserve.<br>
           And I hope I get to be there for many more of your birthdays.
         </p>
+
         <p class="vietnamese">Anh yêu em, mặt trời nhỏ của anh. ❤️</p>
         <p class="signature">— Pedro</p>
-        <button class="sun-button" id="sunButton">☀</button>
+
+        <button class="sun-button" id="sunButton" type="button" aria-label="Reveal secret message">
+          ☀
+        </button>
+
         <p class="tiny hidden" id="secret">Te amo e sempre te amarei, meu benzinho</p>
       </div>
     </section>
