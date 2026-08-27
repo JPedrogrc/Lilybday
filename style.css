@@ -12,17 +12,29 @@
   --line: rgba(255,255,255,.12);
 }
 
-html, body {
+html {
+  width: 100%;
+  min-height: 100%;
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
   width: 100%;
   min-height: 100%;
   background: var(--bg);
   color: var(--text);
   font-family: Inter, sans-serif;
   overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-body {
-  position: relative;
+main {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
 }
 
 #stars {
@@ -56,24 +68,27 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
 }
 
-main, .screen {
-  width: 100%;
-  height: 100vh;
-}
-
 .screen {
   position: absolute;
   inset: 0;
   z-index: 1;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 40px 22px;
+  padding-top: max(40px, env(safe-area-inset-top));
+  padding-bottom: max(40px, env(safe-area-inset-bottom));
   opacity: 0;
   visibility: hidden;
   transform: translateY(18px);
   transition: opacity .8s ease, transform .8s ease, visibility .8s;
   overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .screen.active {
@@ -82,7 +97,11 @@ main, .screen {
   transform: translateY(0);
 }
 
-.hero, .center-content, .surprise, .final, .distance-content {
+.hero,
+.center-content,
+.surprise,
+.final,
+.distance-content {
   width: min(760px, 100%);
   text-align: center;
 }
@@ -96,7 +115,9 @@ main, .screen {
   margin-bottom: 22px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: "Cormorant Garamond", serif;
   font-weight: 500;
 }
@@ -107,7 +128,8 @@ h1 {
   letter-spacing: -.04em;
 }
 
-h1 em, h2 em {
+h1 em,
+h2 em {
   color: var(--gold);
   font-style: italic;
 }
@@ -125,7 +147,8 @@ h2 {
   margin-top: 28px;
 }
 
-.sun-symbol, .final-sun {
+.sun-symbol,
+.final-sun {
   color: var(--gold);
   font-size: 2.4rem;
   margin-bottom: 28px;
@@ -138,12 +161,14 @@ h2 {
 
 button {
   border: 0;
-  font-family: Inter, sans-serif;
+  font: inherit;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .primary {
   margin-top: 34px;
+  min-height: 48px;
   padding: 15px 24px;
   border-radius: 999px;
   color: #17130b;
@@ -153,9 +178,8 @@ button {
   transition: transform .25s, box-shadow .25s;
 }
 
-.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 35px rgba(232,200,120,.2);
+.primary:active {
+  transform: scale(.97);
 }
 
 .primary span {
@@ -165,6 +189,8 @@ button {
 .ghost {
   display: block;
   margin: 38px auto 0;
+  min-height: 44px;
+  padding: 10px 12px;
   color: #aaa6a0;
   background: transparent;
   font-size: .72rem;
@@ -173,7 +199,20 @@ button {
   transition: color .25s;
 }
 
-.ghost:hover { color: var(--gold); }
+.ghost:active {
+  color: var(--gold);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 35px rgba(232,200,120,.2);
+  }
+
+  .ghost:hover {
+    color: var(--gold);
+  }
+}
 
 .sunrise {
   position: relative;
@@ -247,16 +286,29 @@ button {
   flex-direction: column;
   gap: 6px;
   min-width: 90px;
+  text-align: center;
 }
 
-.flag { font-size: 2rem; }
-.place strong { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
-.place small { color: var(--muted); font-size: .7rem; }
+.flag {
+  font-size: 2rem;
+}
+
+.place strong {
+  font-size: .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.place small {
+  color: var(--muted);
+  font-size: .7rem;
+}
 
 .flight {
   display: flex;
   align-items: center;
   flex: 1;
+  min-width: 0;
   gap: 12px;
 }
 
@@ -307,9 +359,15 @@ button {
   transition: transform .3s, border-color .3s;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(232,200,120,.35);
+.card:active {
+  transform: scale(.99);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(232,200,120,.35);
+  }
 }
 
 .card span {
@@ -402,9 +460,15 @@ button {
   transition: transform .5s, background .5s;
 }
 
-.sun-button:hover {
-  transform: rotate(180deg) scale(1.08);
-  background: rgba(232,200,120,.08);
+.sun-button:active {
+  transform: scale(.95);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sun-button:hover {
+    transform: rotate(180deg) scale(1.08);
+    background: rgba(232,200,120,.08);
+  }
 }
 
 .tiny {
@@ -414,29 +478,193 @@ button {
   font-style: italic;
 }
 
+/* iPhone / small-screen tuning */
 @media (max-width: 650px) {
   .screen {
     align-items: flex-start;
-    padding-top: 70px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: max(55px, env(safe-area-inset-top));
+    padding-bottom: max(35px, env(safe-area-inset-bottom));
   }
 
-  .cards {
-    grid-template-columns: 1fr;
+  .hero,
+  .center-content,
+  .surprise,
+  .final,
+  .distance-content {
+    width: 100%;
   }
 
-  .card.special {
-    grid-column: auto;
+  h1 {
+    font-size: clamp(3.5rem, 16vw, 5rem);
+    line-height: .82;
+  }
+
+  h2 {
+    font-size: clamp(2.8rem, 13vw, 4rem);
+  }
+
+  .eyebrow {
+    font-size: .62rem;
+    letter-spacing: .22em;
+    line-height: 1.5;
+  }
+
+  .soft {
+    font-size: .85rem;
+    line-height: 1.7;
+  }
+
+  .primary {
+    min-height: 48px;
+    padding: 14px 22px;
+  }
+
+  .ghost {
+    min-height: 44px;
+    margin-top: 30px;
+  }
+
+  .sunrise {
+    width: 125px;
+    height: 125px;
+    margin-bottom: 25px;
+  }
+
+  .sun {
+    font-size: 3.5rem;
+  }
+
+  .glow {
+    width: 90px;
+    height: 90px;
+  }
+
+  .letter-wrap {
+    padding: 10px 0 40px;
+  }
+
+  .letter {
+    font-size: 1.12rem;
+    line-height: 1.68;
+  }
+
+  .letter p {
+    margin-bottom: 18px;
   }
 
   .route {
-    gap: 8px;
+    gap: 6px;
+    margin: 45px auto 38px;
+  }
+
+  .place {
+    min-width: 65px;
+  }
+
+  .flag {
+    font-size: 1.8rem;
+  }
+
+  .place strong {
+    font-size: .68rem;
+  }
+
+  .place small {
+    font-size: .65rem;
   }
 
   .flight {
     gap: 5px;
   }
 
+  .plane {
+    font-size: 1rem;
+  }
+
+  .quote {
+    font-size: 1.3rem;
+    line-height: 1.45;
+  }
+
+  .things {
+    padding: 10px 0 45px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .card,
+  .card.special {
+    grid-column: auto;
+  }
+
+  .card {
+    padding: 21px;
+  }
+
+  .card h3 {
+    font-size: 1.45rem;
+  }
+
+  .card p {
+    font-size: .78rem;
+  }
+
+  .hug-message p {
+    font-size: 1.8rem;
+  }
+
+  .final-text {
+    font-size: .82rem;
+    line-height: 1.8;
+  }
+
+  .vietnamese {
+    font-size: 1.25rem;
+    line-height: 1.45;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+  .screen {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  h1 {
+    font-size: 3.35rem;
+  }
+
+  h2 {
+    font-size: 2.65rem;
+  }
+
   .letter {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
+  }
+
+  .route {
+    margin-top: 35px;
+  }
+
+  .place {
+    min-width: 58px;
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
   }
 }
