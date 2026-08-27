@@ -2,12 +2,16 @@ const screens = document.querySelectorAll(".screen");
 let current = 1;
 
 function goTo(number) {
-  screens.forEach(screen => screen.classList.remove("active"));
   const next = document.getElementById(`screen-${number}`);
-  if (next) {
-    next.classList.add("active");
-    current = number;
-  }
+
+  if (!next) return;
+
+  screens.forEach(screen => screen.classList.remove("active"));
+  next.classList.add("active");
+  current = number;
+
+  // Always start a new screen at the top on phones.
+  next.scrollTop = 0;
 }
 
 document.querySelectorAll("[data-next]").forEach(button => {
@@ -18,6 +22,7 @@ document.querySelectorAll("[data-next]").forEach(button => {
 
 // Stars
 const stars = document.getElementById("stars");
+
 for (let i = 0; i < 120; i++) {
   const star = document.createElement("span");
   star.className = "star";
@@ -29,6 +34,22 @@ for (let i = 0; i < 120; i++) {
   stars.appendChild(star);
 }
 
+// Music
+const openButton = document.getElementById("openButton");
+const music = document.getElementById("music");
+
+music.volume = 0.25;
+
+openButton.addEventListener("click", async () => {
+  try {
+    await music.play();
+  } catch (error) {
+    console.error("Não foi possível iniciar a música:", error);
+  }
+
+  goTo(2);
+});
+
 // Hug surprise
 const hugButton = document.getElementById("hugButton");
 const hugMessage = document.getElementById("hugMessage");
@@ -37,6 +58,7 @@ const finalNext = document.getElementById("finalNext");
 hugButton.addEventListener("click", () => {
   hugButton.style.display = "none";
   hugMessage.classList.add("show");
+
   setTimeout(() => {
     finalNext.classList.remove("hidden");
   }, 1800);
@@ -51,24 +73,13 @@ sunButton.addEventListener("click", () => {
   sunButton.style.transform = "rotate(180deg) scale(1.08)";
 });
 
-// Keyboard navigation
-document.addEventListener("keydown", e => {
-  if (e.key === "ArrowRight" && current < 7) goTo(current + 1);
-  if (e.key === "ArrowLeft" && current > 1) goTo(current - 1);
-});
-
-const openButton = document.getElementById("openButton");
-const music = document.getElementById("music");
-
-music.volume = 0.25;
-
-openButton.addEventListener("click", async () => {
-  try {
-    await music.play();
-    console.log("Música iniciada!");
-  } catch (error) {
-    console.error("Não foi possível iniciar a música:", error);
+// Keyboard navigation for desktop
+document.addEventListener("keydown", event => {
+  if (event.key === "ArrowRight" && current < 7) {
+    goTo(current + 1);
   }
 
-  goTo(2);
+  if (event.key === "ArrowLeft" && current > 1) {
+    goTo(current - 1);
+  }
 });
